@@ -9,14 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #14171A;
-    --bg-raised: #1A1E22;
-    --text: #F3F1EC;
-    --text-dim: #B8BCBE;
-    --text-mute: #7C8589;
-    --accent: #5EE6B0;
-    --accent-dim: #2D5A48;
-    --line: #2A2F33;
+    --bg: #0E1120;
+    --bg-raised: #171A2E;
+    --text: #ECEAF6;
+    --text-dim: #A9ADC9;
+    --text-mute: #6D7092;
+    --accent: #FF8A4C;
+    --accent-dim: #6B3A22;
+    --line: #262A44;
     --mono: 'Space Mono', monospace;
     --sans: 'Inter', sans-serif;
   }
@@ -110,13 +110,13 @@
     width:7px; height:7px;
     border-radius:50%;
     background:var(--accent);
-    box-shadow:0 0 0 0 rgba(94,230,176,0.6);
+    box-shadow:0 0 0 0 rgba(255,138,76,0.6);
     animation:pulse 2s infinite;
   }
   @keyframes pulse{
-    0%{ box-shadow:0 0 0 0 rgba(94,230,176,0.5); }
-    70%{ box-shadow:0 0 0 8px rgba(94,230,176,0); }
-    100%{ box-shadow:0 0 0 0 rgba(94,230,176,0); }
+    0%{ box-shadow:0 0 0 0 rgba(255,138,76,0.5); }
+    70%{ box-shadow:0 0 0 8px rgba(255,138,76,0); }
+    100%{ box-shadow:0 0 0 0 rgba(255,138,76,0); }
   }
   h1{
     font-family:var(--mono);
@@ -154,7 +154,7 @@
     border-color:var(--accent);
   }
   .btn-primary:hover{
-    background:#7BF0C2;
+    background:#FFAB7A;
     transform:translateY(-1px);
   }
   .btn-ghost{
@@ -285,7 +285,7 @@
     border:1px solid var(--accent-dim);
     padding:4px 9px;
     border-radius:3px;
-    background:rgba(94,230,176,0.06);
+    background:rgba(255,138,76,0.08);
   }
   .project-visual{
     height:3px;
@@ -387,20 +387,39 @@
   }
 
   /* ---------- CERTS ---------- */
+  .cert-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
   .cert-item{
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     gap:14px;
-    padding:16px 20px;
+    padding:22px 20px;
     border:1px solid var(--line);
     border-radius:6px;
-    margin-bottom:12px;
+    background:var(--bg-raised);
+    transition:border-color .25s;
   }
+  .cert-item:hover{ border-color:var(--accent-dim); }
   .cert-dot{
     width:8px; height:8px;
+    margin-top:6px;
     border-radius:50%;
     background:var(--accent);
     flex-shrink:0;
+  }
+  .cert-name{
+    font-weight:600;
+    font-size:15px;
+    margin-bottom:6px;
+  }
+  .cert-issuer{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-mute);
+    letter-spacing:0.3px;
   }
 
   /* ---------- CONTACT ---------- */
@@ -446,6 +465,7 @@
     .skills-grid{ grid-template-columns:1fr; }
     .edu-item{ grid-template-columns:1fr; gap:6px; }
     .edu-cgpa{ text-align:left; }
+    .cert-grid{ grid-template-columns:1fr; }
     section{ padding:70px 0; }
     .project-head{ padding:24px 20px 0 20px; }
     .project-body{ padding:20px 20px 24px 20px; }
@@ -466,6 +486,7 @@
       <a href="#projects">projects</a>
       <a href="#skills">skills</a>
       <a href="#education">education</a>
+      <a href="#certifications">certifications</a>
       <a href="#contact">contact</a>
       <a href="https://www.linkedin.com/in/mohamed-asrar-4843833a2" target="_blank" rel="noopener">linkedin</a>
     </div>
@@ -518,7 +539,7 @@
         <div class="stat-label">CGPA — MCA, in progress</div>
       </div>
       <div class="stat">
-        <div class="stat-num">2</div>
+        <div class="stat-num">3</div>
         <div class="stat-label">end-to-end projects shipped</div>
       </div>
       <div class="stat">
@@ -532,7 +553,32 @@
 <section id="projects">
   <div class="wrap">
     <div class="section-tag">// projects</div>
-    <h2 class="section-title">Two systems, two different problems.</h2>
+    <h2 class="section-title">Three systems, three different problems.</h2>
+
+    <div class="project">
+      <div class="project-head">
+        <div>
+          <div class="project-name">Complaint Management System</div>
+          <div class="project-tags">
+            <span class="tag">MERN</span>
+            <span class="tag">Microservices</span>
+            <span class="tag">RabbitMQ</span>
+            <span class="tag">Redis</span>
+            <span class="tag">Docker</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-visual"></div>
+      <div class="project-body">
+        <ul>
+          <li>Designed as a set of independent microservices (MongoDB, Express, React, Node) instead of one monolith, so each service — auth, complaints, notifications — can be built, deployed, and scaled on its own.</li>
+          <li>Used RabbitMQ as the message broker between services, so a new complaint or status update is published as an event rather than triggering a chain of direct, blocking API calls.</li>
+          <li>Added Redis for caching frequently-read data and session state, cutting down repeated database hits under load.</li>
+          <li>Containerized every service with Docker so the whole system spins up consistently across environments with one command.</li>
+        </ul>
+        <div class="project-note">→ built to explore how distributed systems patterns (queues, caching, service isolation) hold up outside a monolithic app.</div>
+      </div>
+    </div>
 
     <div class="project">
       <div class="project-head">
@@ -644,12 +690,34 @@
       </div>
       <div class="edu-cgpa">CGPA 7.89</div>
     </div>
+  </div>
+</section>
 
-    <div style="margin-top:48px;">
-      <div class="section-tag">// certifications</div>
+<section id="certifications">
+  <div class="wrap">
+    <div class="section-tag">// certifications</div>
+    <h2 class="section-title">Proof of the fundamentals.</h2>
+    <div class="cert-grid">
       <div class="cert-item">
         <div class="cert-dot"></div>
-        <div>HP LIFE — Data Science &amp; Analytics Certification</div>
+        <div>
+          <div class="cert-name">Data Science &amp; Analytics Certification</div>
+          <div class="cert-issuer">HP LIFE</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-dot"></div>
+        <div>
+          <div class="cert-name">Exploratory Data Analysis Certification</div>
+          <div class="cert-issuer">Infosys Springboard</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-dot"></div>
+        <div>
+          <div class="cert-name">Python (Basic) Certification</div>
+          <div class="cert-issuer">HackerRank</div>
+        </div>
       </div>
     </div>
   </div>
